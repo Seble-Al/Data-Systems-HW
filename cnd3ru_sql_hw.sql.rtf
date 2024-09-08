@@ -1,0 +1,126 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2759
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red19\green40\blue75;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c9020\c21176\c36471;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sa400\partightenfactor0
+
+\f0\fs69\fsmilli34667 \AppleTypeServices\AppleTypeServicesF65539 \cf2 \expnd0\expndtw0\kerning0
+SQL Homework Assignment.\
+\pard\pardeftab720\sl337\sa266\partightenfactor0
+
+\f1\fs29\fsmilli14667 \AppleTypeServices \cf3 #World Database queries\
+use world;\
+/*\
+World Database Questions:\
+Easy:\
+1. List all countries in South America.\
+2. Find the population of 'Germany'.\
+3. Retrieve all cities in the country 'Japan'.\
+Medium:\
+4. Find the 3 most populated countries in the 'Africa' region.\
+5. Retrieve the country and its life expectancy where the population is between 1 and 5 million.\
+6. List countries with an official language of 'French'.\
+*/\
+\'a0\
+select * from country LIMIT 0, 4; # this is just so it's easier to look at all the columns\
+\'a0\
+#1\
+select name from country where continent = "South America";\
+\'a0\
+#2\
+select Population from country where name = "Germany";\
+\'a0\
+#3\
+select name from city where countrycode = "JPN";\
+\'a0\
+#4\
+SELECT name, Population from country where continent = "Africa" order by Population DESC LIMIT 0,3;\
+\'a0\
+#5\
+SELECT name, lifeExpectancy from country where Population >1000000 and population <5000000 order by Population DESC;\
+\'a0\
+#6\
+SELECT name from country \
+JOIN countrylanguage ON country.code = countrylanguage.CountryCode\
+WHERE countrylanguage.Language = "French" and countrylanguage.IsOfficial = "T";\
+\'a0\
+\'a0\
+#\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 Chinook database\
+Use\'a0 Chinook_AutoIncrement;\
+#7\
+select Title from Album where ArtistId = "AC/DC";\
+\'a0\
+# 8\
+select firstname,lastname, email from Customer where country = "Brazil";\
+\'a0\
+#9\
+select DISTINCT Name from Playlist;\
+\'a0\
+#10 \
+SELECT count(*) FROM Track WHERE GenreId = 1;\
+\'a0\
+#11\
+SELECT count(*) FROM Employee WHERE Reportsto = 2;\
+\'a0\
+#12\
+select sum(total) from Invoice;\
+select count(*) from Customer;\
+select 2328.60/59;\
+\'a0\
+# database creation\
+Use cnd3ru;\
+\'a0\
+CREATE TABLE Customer_Artee\
+(\
+CustoID varchar(255) PRIMARY KEY, # customer ID\
+LastName varchar(255),\
+FirstName varchar(255),\
+Email varchar(255)\
+);\
+\'a0\
+CREATE TABLE Invoice_Artee\
+(\
+InvoiceID varchar(255) PRIMARY KEY, #invoice ID\
+Product_Type int references Product_Type_Artee(ProductID), \
+UnitsPurchased int\
+);\
+\'a0\
+CREATE TABLE Product_Type_Artee\
+(\
+ProductID INT PRIMARY KEY, # connected to product_type in Invoice\
+Name varchar(255),\
+Unit_Price float\
+);\
+\'a0\
+INSERT INTO Customer_Artee (CustoID, LastName, FirstName, email) VALUES\
+\'a0\
+\'a0\'a0\'a0 ("f234q3454hstjh", "Williams","Aurora","aurorawilliams@yahoo.com"),\
+\'a0\'a0\'a0 ("5arrwewyw7u","Smith","Emilia","milliesmith@google.com"),\
+\'a0\'a0\'a0 ("7arsdgs4q35","Roschburg","Brandon","milliesmith@google.com"),\
+\'a0\'a0\'a0 ("rartsy5q364577","Younge","Choi","milliesmith@google.com"),\
+\'a0\'a0\'a0 ("uatstyq4545647", "Wagner","Jonathan","wagstation@outlook.com");\
+\'a0\'a0\'a0 \
+INSERT INTO Product_Type_Artee (ProductID, Name, Unit_Price) VALUES\
+\'a0\
+\'a0\'a0\'a0 (1, "Art Print 11x7", 12.99),\
+\'a0\'a0\'a0 (2,"Easel",34.50),\
+\'a0\'a0\'a0 (3,"Acrylic Set", 24.99),\
+\'a0\'a0\'a0 (4,"Paintbrush Set", 7.01);\
+\'a0\'a0\'a0 \
+INSERT INTO Invoice_Artee (InvoiceID, Product_Type, UnitsPurchased) VALUES\
+\'a0\
+\'a0\'a0\'a0 ("A", 1, 1),\
+\'a0\'a0\'a0 ("56",3,2),\
+\'a0\'a0\'a0 ("45",3, 1),\
+\'a0\'a0\'a0 ("23425", 4, 1);\
+\'a0\
+\'a0\
+# 3 queries\
+select * from Product_Type_Artee where Unit_Price > 5.00;\
+\'a0\
+select * from Invoice_Artee where Product_Type = 1;\
+\'a0\
+select sum(UnitsPurchased) from Invoice_Artee;\
+}
